@@ -1,16 +1,20 @@
-import { Router } from "express";
-import {
-  consultarMonedas,
-  crearMonedaUsuario,
-  editarMonedasUsuario,
-  eliminarMonedasUsuario,
-  consultarMonedasUsarios,
-} from "../controllers/cryptouser.controller";
-import authMiddleware from "../middleware/auth.middleware";
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _express = require("express");
+
+var _cryptouser = require("../controllers/cryptouser.controller");
+
+var _auth = _interopRequireDefault(require("../middleware/auth.middleware"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // router
-const router = Router();
-
+const router = (0, _express.Router)();
 /**
  * @swagger
  * /api/cryptouser/:
@@ -20,8 +24,8 @@ const router = Router();
  *      200:
  *        description: Estas son las monedas
  */
-router.get("/", authMiddleware, consultarMonedas);
 
+router.get("/", _cryptouser.consultarMonedas);
 /**
  * @swagger
  * /api/cryptouser/{userId}:
@@ -38,8 +42,8 @@ router.get("/", authMiddleware, consultarMonedas);
  *      200:
  *        description: Estas son las monedas por este usuario
  */
-router.get("/:id", authMiddleware, consultarMonedasUsarios);
 
+router.get("/:id", _auth.default, _cryptouser.consultarMonedasUsarios);
 /**
  * @swagger
  * /api/cryptouser/{userId}:
@@ -100,8 +104,8 @@ router.get("/:id", authMiddleware, consultarMonedasUsarios);
  *      200:
  *        description: Su moneda fue grabada
  */
-router.post("/:id", authMiddleware, crearMonedaUsuario);
 
+router.post("/:id", _auth.default, _cryptouser.crearMonedaUsuario);
 /**
  * @swagger
  * /api/cryptouser/{userId}:
@@ -163,8 +167,8 @@ router.post("/:id", authMiddleware, crearMonedaUsuario);
  *      200:
  *        description: Su moneda fue modificada
  */
-router.put("/:id", authMiddleware, editarMonedasUsuario);
 
+router.put("/:id", _auth.default, _cryptouser.editarMonedasUsuario);
 /**
  * @swagger
  * /api/cryptouser/${userId}:
@@ -202,6 +206,7 @@ router.put("/:id", authMiddleware, editarMonedasUsuario);
  *      200:
  *        description: Su moneda fue eliminada
  */
-router.delete("/:id", authMiddleware, eliminarMonedasUsuario);
 
-export default router;
+router.delete("/:id", _auth.default, _cryptouser.eliminarMonedasUsuario);
+var _default = router;
+exports.default = _default;

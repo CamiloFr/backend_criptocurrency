@@ -1,7 +1,7 @@
 import app from ".";
 
 // port
-const port = 1000;
+const port = process.env.PORT || 3000;
 
 // server online
 const server = app.listen(port, () => {

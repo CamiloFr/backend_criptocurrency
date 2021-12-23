@@ -4,8 +4,13 @@ import MonedasUsuarios from "../models/monedasusuario.models";
 import Usuarios from "../models/usuarios.models";
 
 export const consultarMonedas = async (req, res) => {
+  let { pais } = req.usuario;
   try {
-    let data = await Monedas.findAll();
+    let data = await Monedas.findAll({
+      where: {
+        pais,
+      },
+    });
     return res.json({
       mensaje: "Proceso completado",
       data,
@@ -20,7 +25,7 @@ export const consultarMonedas = async (req, res) => {
 
 export const consultarMonedasUsarios = async (req, res) => {
   let { id } = req.params;
-  let { idusuario } = req.usuario
+  let { idusuario } = req.usuario;
 
   try {
     let usuario = Usuarios.findOne({
@@ -130,7 +135,7 @@ export const crearMonedaUsuario = async (req, res) => {
 
 export const editarMonedasUsuario = async (req, res) => {
   // let { id } = req.params;
-  let { idusuario } = req.usuario
+  let { idusuario } = req.usuario;
   let { simbolo, nombremoneda, tasacambio, pais, nombreusuario_monedas, idusuario_monedas, simboloanterior } = req.body;
 
   let errores = validationResult(req);

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node build/app.js",
     "dev": "nodemon --exec ./node_modules/.bin/babel-node src/app.js",
     "build": "babel src/ --out-dir build",
     "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --detectOpenHandles",
