@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  database:
+    image: postgres:13
+    container_name: database_pg
+    ports: 
+      - ${DB_PORT:-5432}:5432
+    environment: 
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - ./my-postgres.conf:/etc/postgresql/postgresql.conf
+      - ./my-pg_hba.conf:/etc/postgresql/pg_hba.conf
+  # server:
+  #   build: .
+  #   depends_on: 
+  #     - database
+  #   ports: 
+  #     - 4000:4000
+  #   volumes:
+  #     - ./uploads
+volumes: 
+  data:
